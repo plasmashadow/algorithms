@@ -19,6 +19,7 @@ from algorithms.sorting import (
 
 
 class SortingAlgorithmTestCase(unittest.TestCase):
+
     """
     Shared code for a sorting unit test.
     """
@@ -30,6 +31,7 @@ class SortingAlgorithmTestCase(unittest.TestCase):
 
 
 class TestBogoSort(SortingAlgorithmTestCase):
+
     """
     Tests Bogo sort on a small range from 0-9
     """
@@ -40,6 +42,7 @@ class TestBogoSort(SortingAlgorithmTestCase):
 
 
 class TestBubbleSort(SortingAlgorithmTestCase):
+
     """
     Tests Bubble sort on a small range from 0-9
     """
@@ -50,6 +53,7 @@ class TestBubbleSort(SortingAlgorithmTestCase):
 
 
 class TestCocktailSort(SortingAlgorithmTestCase):
+
     """
     Tests Cocktail sort on a small range from 0-9
     """
@@ -60,6 +64,7 @@ class TestCocktailSort(SortingAlgorithmTestCase):
 
 
 class TestCombSort(SortingAlgorithmTestCase):
+
     """
     Tests Comb sort on a small range from 0-9
     """
@@ -70,6 +75,7 @@ class TestCombSort(SortingAlgorithmTestCase):
 
 
 class TestGnomeSort(SortingAlgorithmTestCase):
+
     """
     Tests Gnome sort on a small range from 0-9
     """
@@ -80,6 +86,7 @@ class TestGnomeSort(SortingAlgorithmTestCase):
 
 
 class TestHeapSort(SortingAlgorithmTestCase):
+
     """
     Test Heap sort on a small range from 0-9
     """
@@ -90,6 +97,7 @@ class TestHeapSort(SortingAlgorithmTestCase):
 
 
 class TestInsertionSort(SortingAlgorithmTestCase):
+
     """
     Tests Insertion sort on a small range from 0-9
     """
@@ -100,6 +108,7 @@ class TestInsertionSort(SortingAlgorithmTestCase):
 
 
 class TestMergeSort(SortingAlgorithmTestCase):
+
     """
     Tests Merge sort on a small range from 0-9
     also tests merge function included in merge sort
@@ -118,6 +127,7 @@ class TestMergeSort(SortingAlgorithmTestCase):
 
 
 class TestQuickSort(SortingAlgorithmTestCase):
+
     """
     Test Quick sort on a small range from 0-9
     """
@@ -128,10 +138,12 @@ class TestQuickSort(SortingAlgorithmTestCase):
 
 
 class TestQuickSortInPlace(SortingAlgorithmTestCase):
+
     """
     Tests Quick sort in place version on a small range from 0-9
     also tests partition function included in quick sort
     """
+
     def test_quicksort_in_place(self):
         self.output = quick_sort_in_place.sort(
             self.input, 0,
@@ -150,6 +162,7 @@ class TestQuickSortInPlace(SortingAlgorithmTestCase):
 
 
 class TestSelectionort(SortingAlgorithmTestCase):
+
     """
     Test Selection sort on a small range from 0-9
     """
@@ -160,6 +173,7 @@ class TestSelectionort(SortingAlgorithmTestCase):
 
 
 class TestShellSort(SortingAlgorithmTestCase):
+
     """
     Test Shell sort on a small range from 0-9
     """
@@ -170,6 +184,7 @@ class TestShellSort(SortingAlgorithmTestCase):
 
 
 class TestStrandSort(SortingAlgorithmTestCase):
+
     """
     Tests Strand sort on a small range from 0-9
     """

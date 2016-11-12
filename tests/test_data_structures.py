@@ -16,6 +16,7 @@ from algorithms.data_structures import (
 
 
 class TestBinarySearchTree(unittest.TestCase):
+
     """
     Test Binary Search Tree Implementation
     """
@@ -368,9 +369,11 @@ class TestBinarySearchTree(unittest.TestCase):
 
 
 class TestDirectedGraph(unittest.TestCase):
+
     """
     Test Undirected Graph Implementation
     """
+
     def test_directed_graph(self):
 
         # init
@@ -466,9 +469,11 @@ class TestDirectedGraph(unittest.TestCase):
 
 
 class TestQueue(unittest.TestCase):
+
     """
     Test Queue Implementation
     """
+
     def test_queue(self):
         self.que = queue.Queue()
         self.que.add(1)
@@ -487,6 +492,7 @@ class TestQueue(unittest.TestCase):
 
 
 class TestSinglyLinkedList(unittest.TestCase):
+
     """
     Test Singly Linked List Implementation
     """
@@ -508,9 +514,11 @@ class TestSinglyLinkedList(unittest.TestCase):
 
 
 class TestStack(unittest.TestCase):
+
     """
     Test Stack Implementation
     """
+
     def test_stack(self):
         self.sta = stack.Stack()
         self.sta.add(5)
@@ -524,9 +532,11 @@ class TestStack(unittest.TestCase):
 
 
 class TestUndirectedGraph(unittest.TestCase):
+
     """
     Test Undirected Graph Implementation
     """
+
     def test_undirected_graph(self):
 
         # init
@@ -604,9 +614,11 @@ class TestUndirectedGraph(unittest.TestCase):
 
 
 class TestUnionFind(unittest.TestCase):
+
     """
     Test Union Find Implementation
     """
+
     def test_union_find(self):
         self.uf = union_find.UnionFind(4)
         self.uf.make_set(4)
@@ -620,9 +632,11 @@ class TestUnionFind(unittest.TestCase):
 
 
 class TestUnionFindByRank(unittest.TestCase):
+
     """
     Test Union Find Implementation
     """
+
     def test_union_find_by_rank(self):
         self.uf = union_find_by_rank.UnionFindByRank(6)
         self.uf.make_set(6)
@@ -647,9 +661,11 @@ class TestUnionFindByRank(unittest.TestCase):
 
 
 class TestUnionFindWithPathCompression(unittest.TestCase):
+
     """
     Test Union Find Implementation
     """
+
     def test_union_find_with_path_compression(self):
         self.uf = (
             union_find_with_path_compression
@@ -676,6 +692,7 @@ class TestUnionFindWithPathCompression(unittest.TestCase):
 
 
 class TestLCPSuffixArrays(unittest.TestCase):
+
     def setUp(self):
         super(TestLCPSuffixArrays, self).setUp()
         self.case_1 = "aaaaaa"

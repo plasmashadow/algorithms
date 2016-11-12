@@ -12,6 +12,7 @@
 
 
 class Node(object):
+
     """
     Implementation of a Node in a Binary Search Tree.
     """
@@ -25,6 +26,7 @@ class Node(object):
 
 
 class BinarySearchTree(object):
+
     """
     Implementation of a Binary Search Tree.
     """

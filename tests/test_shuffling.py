@@ -4,6 +4,7 @@ from algorithms.shuffling import knuth
 
 
 class ShufflingAlgorithmTestCase(unittest.TestCase):
+
     """
     Shared code for shuffling unit tests.
     """
@@ -13,9 +14,11 @@ class ShufflingAlgorithmTestCase(unittest.TestCase):
 
 
 class TestKnuthShuffle(ShufflingAlgorithmTestCase):
+
     """
     Tests Knuth shuffle on a small range from 0-9
     """
+
     def test_knuthshuffle(self):
         self.shuffle = knuth.shuffle(list(range(10)))
         self.not_shuffled = 0

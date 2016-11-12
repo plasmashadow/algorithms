@@ -51,6 +51,7 @@ class TestExtendedGCD(unittest.TestCase):
 
 
 class TestLCM(unittest.TestCase):
+
     def test_lcm(self):
         # Find lcm of (16, 20) and (20, 16)
         r, r2 = lcm(16, 20), lcm(20, 16)
@@ -61,6 +62,7 @@ class TestLCM(unittest.TestCase):
 
 
 class TestPrimalityTest(unittest.TestCase):
+
     def test_is_prime(self):
         self.assertIs(is_prime(3), True)
         self.assertIs(is_prime(15), False)

@@ -18,6 +18,7 @@
 
 
 class UnionFindByRank:
+
     def __init__(self, N):
         if type(N) != int:
             raise TypeError("size must be integer")

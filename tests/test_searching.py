@@ -12,6 +12,7 @@ from algorithms.searching import (
 
 
 class TestBinarySearch(unittest.TestCase):
+
     """
     Tests Binary Search on a small range from 0-9
     """
@@ -42,6 +43,7 @@ class TestBinarySearch(unittest.TestCase):
 
 
 class TestBMHSearch(unittest.TestCase):
+
     """
     Tests BMH search on string "ABCDE FG ABCDEABCDEF"
     """
@@ -55,9 +57,11 @@ class TestBMHSearch(unittest.TestCase):
 
 
 class TestBreadthFirstSearch(unittest.TestCase):
+
     """
     Tests DFS on a graph represented by a adjacency list
     """
+
     def test_bfs(self):
         self.graph = {
             'A': {'B', 'C'},
@@ -87,6 +91,7 @@ class TestBreadthFirstSearch(unittest.TestCase):
 
 
 class TestDepthFirstSearch(unittest.TestCase):
+
     """
     Tests DFS on a graph represented by a adjacency list
     """
@@ -165,6 +170,7 @@ class TestDepthFirstSearch(unittest.TestCase):
 
 
 class TestKMPSearch(unittest.TestCase):
+
     """
     Tests KMP search on string "ABCDE FG ABCDEABCDEF"
     """
@@ -178,6 +184,7 @@ class TestKMPSearch(unittest.TestCase):
 
 
 class TestRabinKarpSearch(unittest.TestCase):
+
     """
     Tests Rabin-Karp search on string "ABCDEFGHIJKLMNOP"
     """

@@ -12,6 +12,7 @@
 
 
 class MersenneTwister:
+
     def __init__(self):
         self.state = []
         self.index = 0

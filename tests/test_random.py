@@ -4,6 +4,7 @@ from algorithms.random import mersenne_twister
 
 
 class TestMersenneTwister(unittest.TestCase):
+
     """
     Tests Mersenne Twister values for several seeds comparing against
     expected values from C++ STL's Mersenne Twister implementation

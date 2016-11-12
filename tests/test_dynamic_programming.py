@@ -4,6 +4,7 @@ from algorithms.dynamic_programming.lcs import lcs
 
 
 class TestLCS(unittest.TestCase):
+
     """
     Tests the Longest Common Subsequence of several strings
     """
