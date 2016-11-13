@@ -5,7 +5,7 @@ from algorithms.data_structures import (
     binary_search_tree,
     digraph,
     queue,
-    singly_linked_list,
+    linked_list,
     stack,
     undirected_graph,
     union_find,
@@ -498,19 +498,18 @@ class TestSinglyLinkedList(unittest.TestCase):
     """
 
     def test_singly_linked_list(self):
-        self.sl = singly_linked_list.SinglyLinkedList()
-        self.sl.add(10)
-        self.sl.add(5)
-        self.sl.add(30)
+        self.sl = linked_list.SinglyLinkedList()
+        self.sl.append(10)
+        self.sl.append(5)
+        self.sl.append(30)
         self.sl.remove(30)
+        self.sl.append_front(1)
 
-        self.assertEqual(self.sl.size, 2)
-        self.assertEqual(self.sl.search(30), False)
-        self.assertEqual(self.sl.search(5), True)
-        self.assertEqual(self.sl.search(10), True)
-        self.assertEqual(self.sl.remove(5), True)
-        self.assertEqual(self.sl.remove(10), True)
-        self.assertEqual(self.sl.size, 0)
+        self.assertFalse(30 in self.sl)
+        self.assertTrue(5 in self.sl)
+        self.assertTrue(10 in self.sl)
+        self.assertEqual(3, self.sl.size)
+        self.assertEqual(1, self.sl.head.data)
 
 
 class TestStack(unittest.TestCase):
