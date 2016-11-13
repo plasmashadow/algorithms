@@ -7,6 +7,7 @@ from algorithms.data_structures import (
     queue,
     linked_list,
     stack,
+    graph,
     undirected_graph,
     union_find,
     union_find_by_rank,
@@ -367,6 +368,19 @@ class TestBinarySearchTree(unittest.TestCase):
             ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
         )
 
+class TestGraphInterface(unittest.TestCase):
+
+    def test_undirected_graph_interface(self):
+        self.gp = graph.UndirectedGraph()
+        self.gp.add_vertex(1)
+        self.gp.add_vertex(2)
+        self.gp.add_vertex(3)
+        self.assertTrue(1 in self.gp)
+        self.assertTrue(2 in self.gp)
+        self.gp.add_edge(1, 2, weight=1)
+        self.assertEqual(len(self.gp.neighbors(1)), 1)
+        self.gp.add_edge(1, 3, weight=1)
+        self.assertEqual(len(self.gp.neighbors(1)), 2)
 
 class TestDirectedGraph(unittest.TestCase):
 
@@ -481,7 +495,7 @@ class TestQueue(unittest.TestCase):
         self.que.add(8)
         self.que.add(5)
         self.que.add(6)
-
+        self.assertTrue(5 in self.que)
         self.assertEqual(self.que.remove(), 1)
         self.assertEqual(self.que.size(), 4)
         self.assertEqual(self.que.remove(), 2)
@@ -489,6 +503,7 @@ class TestQueue(unittest.TestCase):
         self.assertEqual(self.que.remove(), 5)
         self.assertEqual(self.que.remove(), 6)
         self.assertEqual(self.que.is_empty(), True)
+
 
 
 class TestSinglyLinkedList(unittest.TestCase):
@@ -542,6 +557,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.sta.remove(), 2)
         self.assertEqual(self.sta.is_empty(), False)
         self.assertEqual(self.sta.size(), 3)
+
 
 
 class TestUndirectedGraph(unittest.TestCase):

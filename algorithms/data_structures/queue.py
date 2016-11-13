@@ -13,8 +13,7 @@
 """
 from collections import deque
 
-
-class Queue:
+class Queue(object):
     queue_list = deque([])
 
     def __init__(self):
@@ -52,3 +51,8 @@ class Queue:
         Worst Case Complexity:  O(1)
         """
         return len(self.queue_list)
+
+    def __contains__(self, element):
+        """Contains """
+        return element in self.queue_list
+

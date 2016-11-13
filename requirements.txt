@@ -3,3 +3,4 @@
 
 -r requirements/requirements-testing.txt
 -r requirements/requirements-documentation.txt
+six
