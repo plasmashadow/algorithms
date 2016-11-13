@@ -16,6 +16,7 @@ class ListNode(object):
     def __init__(self, data):
         self.data = data
         self.next = None
+        self.prev = None
 
 
 class LinkedList(object):
@@ -81,3 +82,63 @@ class SinglyLinkedList(LinkedList):
             node = node.next
         return False
 
+class DoublyLinkedList(LinkedList):
+
+    def __init__(self, *args):
+        self._size = 0
+        self.head = None
+        for arg in args:
+            self.append(arg)
+
+    def append(self, data):
+
+        if not self.head:
+            self.head = ListNode(data)
+            self._size = 1
+        else:
+            node = self.head
+            while node.next:
+                node = node.next
+            new_node = ListNode(data)
+            node.next = new_node
+            new_node.prev = node
+            self._size += 1
+
+    def append_front(self, data):
+
+        node = ListNode(data)
+        node.next = self.head
+        self.head.prev = node
+        self.head = node
+        self._size += 1 
+
+    def __contains__(self, data):
+        node = self.head
+        while node:
+            if node.data == data:
+                return True
+            node = node.next
+        return False
+
+    def remove(self, data):
+        node = self.head
+        prev_node = None
+        next_node = None
+        while node:
+            next_node = node.next
+            if node.data == data:
+                if prev_node:
+                    prev_node.next = next_node
+                if next_node:
+                    next_node.prev = prev_node
+                self._size -= 1
+                return True
+            prev_node = node
+            node = node.next
+        return False
+
+    def __iter__(self):
+        node = self.head
+        while node:
+            yield node.data
+            node = node.next

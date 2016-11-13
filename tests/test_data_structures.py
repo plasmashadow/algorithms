@@ -511,6 +511,20 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(3, self.sl.size)
         self.assertEqual(1, self.sl.head.data)
 
+    def test_doubly_linked_list(self):
+        self.sl = linked_list.DoublyLinkedList()
+        self.sl.append(10)
+        self.sl.append(5)
+        self.sl.append(30)
+        self.sl.remove(30)
+        self.sl.append_front(1)
+
+        self.assertFalse(30 in self.sl)
+        self.assertTrue(5 in self.sl)
+        self.assertTrue(10 in self.sl)
+        self.assertEqual(3, self.sl.size)
+        self.assertEqual(1, self.sl.head.data)
+
 
 class TestStack(unittest.TestCase):
 
