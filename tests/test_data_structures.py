@@ -381,6 +381,8 @@ class TestGraphInterface(unittest.TestCase):
         self.assertEqual(len(self.gp.neighbors(1)), 1)
         self.gp.add_edge(1, 3, weight=1)
         self.assertEqual(len(self.gp.neighbors(1)), 2)
+        self.assertTrue(graph.Vertex(2) in self.gp.neighbors(1))
+        self.assertEqual([1,2,3], self.gp.find_path(1, 3))
 
 class TestDirectedGraph(unittest.TestCase):
 

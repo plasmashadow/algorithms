@@ -28,6 +28,10 @@ class Vertex(object):
 	def remove_neighbor(self, neighbor):
 		return self.neighbors.pop(neighbor)
 
+	def __eq__(self, other):
+		return self.data == other.data
+
+
 class Graph(object):
 
 
@@ -41,6 +45,9 @@ class Graph(object):
 		raise NotImplemented
 
 	def remove_edge(self, x, y):
+		raise NotImplemented
+
+	def find_path(self, x, y, path=[]):
 		raise NotImplemented
 
 	@property
@@ -92,6 +99,21 @@ class UndirectedGraph(Graph):
 	def __contains__(self, x):
 		return x in self.vertexlist
 
+	def find_path(self, _from, _to, path=[]):
+		"""Doing a breath first search to get the path between 
+		   nodes (May not be shortest)
+		"""
+		path = path + [_from]
+		if _from == _to:
+			return path
+		if _from not in self:
+			return []
+		for node in self.vertexlist:
+			if node not in path:
+				new_path = self.find_path(node, _to, path)
+				if new_path:
+					return new_path
+		return []
 
 
 
