@@ -254,7 +254,7 @@ class TestBinarySearchTree(unittest.TestCase):
             self.bst.put(k, v)
         for i in range(self.bst.size() - 1):
             self.bst.delete_min()
-            self.assertEqual(self.bst.min_key(), self.key_val[i+1][0])
+            self.assertEqual(self.bst.min_key(), self.key_val[i + 1][0])
         self.bst.delete_min()
         self.assertEqual(self.bst.min_key(), None)
 
@@ -265,7 +265,7 @@ class TestBinarySearchTree(unittest.TestCase):
             self.bst.put(k, v)
         for i in range(self.bst.size() - 1):
             self.bst.delete_min()
-            self.assertEqual(self.bst.min_key(), self.key_val[i+1][0])
+            self.assertEqual(self.bst.min_key(), self.key_val[i + 1][0])
         self.bst.delete_min()
         self.assertEqual(self.bst.min_key(), None)
 
@@ -276,7 +276,7 @@ class TestBinarySearchTree(unittest.TestCase):
             self.bst.put(k, v)
         for i in range(self.bst.size() - 1, 0, -1):
             self.bst.delete_max()
-            self.assertEqual(self.bst.max_key(), self.key_val[i-1][0])
+            self.assertEqual(self.bst.max_key(), self.key_val[i - 1][0])
         self.bst.delete_max()
         self.assertEqual(self.bst.max_key(), None)
 
@@ -287,7 +287,7 @@ class TestBinarySearchTree(unittest.TestCase):
             self.bst.put(k, v)
         for i in range(self.bst.size() - 1, 0, -1):
             self.bst.delete_max()
-            self.assertEqual(self.bst.max_key(), self.key_val[i-1][0])
+            self.assertEqual(self.bst.max_key(), self.key_val[i - 1][0])
         self.bst.delete_max()
         self.assertEqual(self.bst.max_key(), None)
 
@@ -368,6 +368,7 @@ class TestBinarySearchTree(unittest.TestCase):
             ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
         )
 
+
 class TestGraphInterface(unittest.TestCase):
 
     def test_undirected_graph_interface(self):
@@ -382,7 +383,24 @@ class TestGraphInterface(unittest.TestCase):
         self.gp.add_edge(1, 3, weight=1)
         self.assertEqual(len(self.gp.neighbors(1)), 2)
         self.assertTrue(graph.Vertex(2) in self.gp.neighbors(1))
-        self.assertEqual([1,2,3], self.gp.find_path(1, 3))
+        self.assertEqual([1, 2, 3], self.gp.find_path(1, 3))
+
+    def test_directed_graph_interface(self):
+        self.gp = graph.DirectedGraph()
+        self.gp.add_vertex(1)
+        self.gp.add_vertex(2)
+        self.gp.add_vertex(3)
+        self.gp.add_vertex(5)
+        self.assertTrue(1 in self.gp)
+        self.assertTrue(2 in self.gp)
+        self.gp.add_edge(1, 2, weight=1)
+        self.assertEqual(len(self.gp.neighbors(1)), 1)
+        self.gp.add_edge(1, 3, weight=1)
+        self.assertEqual(len(self.gp.neighbors(1)), 2)
+        self.assertTrue(graph.Vertex(2) in self.gp.neighbors(1))
+        self.gp.add_edge(3, 5, weight=4)
+        self.assertEqual([1, 3, 5], self.gp.find_path(1, 5))
+
 
 class TestDirectedGraph(unittest.TestCase):
 
@@ -507,7 +525,6 @@ class TestQueue(unittest.TestCase):
         self.assertEqual(self.que.is_empty(), True)
 
 
-
 class TestSinglyLinkedList(unittest.TestCase):
 
     """
@@ -559,7 +576,6 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.sta.remove(), 2)
         self.assertEqual(self.sta.is_empty(), False)
         self.assertEqual(self.sta.size(), 3)
-
 
 
 class TestUndirectedGraph(unittest.TestCase):
