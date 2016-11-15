@@ -15,11 +15,13 @@ from collections import defaultdict
 
 
 class Vertex(object):
+
     """
       Node in a graph is called a Vertex
       Contains data and pointer to nearest
       neighbors.
     """
+
     def __init__(self, data):
         self.data = data
         self.neighbors = {}
@@ -51,6 +53,7 @@ class Vertex(object):
 
 
 class Graph(object):
+
     """
     G = f(V, E)
     where G is the graph.
@@ -64,6 +67,7 @@ class Graph(object):
     Current implementation depends on Adjecency List. Which holds the List
     of nearest neighbors to each Vertex.
     """
+
     def neighbors(self, x):
         raise NotImplemented
 
@@ -85,13 +89,11 @@ class Graph(object):
 
 
 class UndirectedGraph(Graph):
-    """ UNDIRECTED GRAPH
+
+    """
+    UNDIRECTED GRAPH
     An undirected graph is a graph in which edges have no orientation.
-    The edge (x, y) is identical to the edge (y, x),
-    i.e., they are not ordered pairs,
-    but sets {x, y} (or 2-multisets) of vertices.
-    The maximum number of edges in an undirected graph without a
-    loop is n(n − 1)/2.
+    The edge (x, y) is identical to the edge (y, x)
     """
 
     def __init__(self):
@@ -164,6 +166,7 @@ class UndirectedGraph(Graph):
 
 
 class DirectedGraph(Graph):
+
     """
     a directed graph (or digraph) is a graph
     (that is a set of vertices connected by edges),
