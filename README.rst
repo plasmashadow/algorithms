@@ -66,5 +66,10 @@ Contributing:
 Contributions are always welcome. Check out the contributing guidelines to get
 started.
 
+Some Usefull links:
+-------------------
+
+http://www.cs.cmu.edu/~clo/www/CMU/DataStructures
+
 .. _`docs`: http://algorithms.readthedocs.org/en/latest/
 .. _`documentation`: http://algorithms.readthedocs.org/en/latest/
