@@ -2,6 +2,7 @@ from random import shuffle
 import unittest
 
 from algorithms.data_structures import (
+    tree,
     binary_search_tree,
     queue,
     linked_list,
@@ -14,8 +15,24 @@ from algorithms.data_structures import (
 )
 
 
-class TestBinarySearchTree(unittest.TestCase):
+class TestTreeInterface(unittest.TestCase):
+    """Test Tree Interface"""
+    def test_tree_interface(self):
+        self.tree = tree.Tree(1)
+        self.tree.add(2, parent=1)
+        self.tree.add(4, parent=1)
+        self.tree.add(3, parent=2)
+        self.tree.add(5, parent=4)
+        self.assertTrue(1 in self.tree)
+        self.assertTrue(2 in self.tree)
+        self.assertEqual(2, self.tree.get_degree(1))
+        self.assertEqual(1, self.tree.get_degree(4))
+        self.assertEqual(0, self.tree.get_degree(3))
+        self.assertEqual([1, 2, 4, 3, 5], list(iter(self.tree)))
+        self.assertEqual([1, 2, 3, 4, 5], list(self.tree.dfs()))
 
+
+class TestBinarySearchTree(unittest.TestCase):
     """
     Test Binary Search Tree Implementation
     """
