@@ -51,7 +51,11 @@ class TreeNode(Container, Hashable):
 
 
 class Tree(object):
-    """Generic tree implementation"""
+    """Generic tree implementation
+        T = f(e, v)
+        where e- element in node.
+              v- list of children.
+    """
     def __init__(self, root=None):
         if not root:
             raise Exception("Root required")
