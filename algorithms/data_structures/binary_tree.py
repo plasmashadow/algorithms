@@ -134,3 +134,12 @@ class BinaryTree(Container):
 
     def __contains__(self, key):
         return self.find(key) is not None
+
+    def __iter__(self):
+    	return InorderTraversor(self._rootNode)
+
+    def preorder(self):
+    	return PreOrderTraversor(self._rootNode)
+
+    def postorder(self):
+    	return PostOrderTraversor(self._rootNode)
