@@ -17,7 +17,9 @@ from algorithms.data_structures import (
 
 
 class TestTreeInterface(unittest.TestCase):
+
     """Test Tree Interface"""
+
     def test_tree_interface(self):
         self.tree = tree.Tree(1)
         self.tree.add(2, parent=1)
@@ -35,6 +37,8 @@ class TestTreeInterface(unittest.TestCase):
 
 class TestBST(unittest.TestCase):
 
+    """Test For Binary Search Tree"""
+
     def setUp(self):
         self.bst = binary_tree.BinaryTree(5, "a")
         self.bst.put(4, "b")
@@ -50,6 +54,8 @@ class TestBST(unittest.TestCase):
     def test_min_object_in_tree(self):
         self.assertEqual(self.bst.min._value, 2)
         self.assertEqual(self.bst.min._id, "d")
+        self.bst.put(1, "z")
+        self.assertEqual(self.bst.min._value, 1)
 
     def test_max_object_in_tree(self):
         self.assertEqual(self.bst.max._value, 8)
@@ -74,362 +80,10 @@ class TestBST(unittest.TestCase):
         self.assertEqual(lst, [2, 4, 8, 7, 6, 5])
 
     def test_size_of_tree(self):
-        self.assertEqual(len(self.bst), 4)
+        self.assertEqual(len(self.bst), 6)
         self.bst.delete(8)
         self.bst.delete(7)
-        self.assertEqual(len(self.bst), 3)
-
-
-class TestBinarySearchTree(unittest.TestCase):
-    """
-    Test Binary Search Tree Implementation
-    """
-    key_val = [
-        ("a", 1), ("b", 2), ("c", 3),
-        ("d", 4), ("e", 5), ("f", 6),
-        ("g", 7), ("h", 8), ("i", 9)
-    ]
-
-    def shuffle_list(self, ls):
-        shuffle(ls)
-        return ls
-
-    def test_size(self):
-        # Size starts at 0
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.assertEqual(self.bst.size(), 0)
-        # Doing a put increases the size to 1
-        self.bst.put("one", 1)
-        self.assertEqual(self.bst.size(), 1)
-        # Putting a key that is already in doesn't change size
-        self.bst.put("one", 1)
-        self.assertEqual(self.bst.size(), 1)
-        self.bst.put("one", 2)
-        self.assertEqual(self.bst.size(), 1)
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        size = 0
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-            size += 1
-            self.assertEqual(self.bst.size(), size)
-
-        shuffled = self.shuffle_list(self.key_val[:])
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        size = 0
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-            size += 1
-            self.assertEqual(self.bst.size(), size)
-
-    def test_is_empty(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.assertTrue(self.bst.is_empty())
-        self.bst.put("a", 1)
-        self.assertFalse(self.bst.is_empty())
-
-    def test_get(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        # Getting a key not in BST returns None
-        self.assertEqual(self.bst.get("one"), None)
-
-        # Get with a present key returns proper value
-        self.bst.put("one", 1)
-        self.assertEqual(self.bst.get("one"), 1)
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-            self.assertEqual(self.bst.get(k), v)
-
-        shuffled = self.shuffle_list(self.key_val[:])
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-            self.assertEqual(self.bst.get(k), v)
-
-    def test_contains(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.assertFalse(self.bst.contains("a"))
-        self.bst.put("a", 1)
-        self.assertTrue(self.bst.contains("a"))
-
-    def test_put(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-
-        # When BST is empty first put becomes root
-        self.bst.put("bbb", 1)
-        self.assertEqual(self.bst.root.key, "bbb")
-        self.assertEqual(self.bst.root.left, None)
-
-        # Adding a key greater than root doesn't update the left tree
-        # but does update the right
-        self.bst.put("ccc", 2)
-        self.assertEqual(self.bst.root.key, "bbb")
-        self.assertEqual(self.bst.root.left, None)
-        self.assertEqual(self.bst.root.right.key, "ccc")
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("bbb", 1)
-        # Adding a key less than root doesn't update the right tree
-        # but does update the left
-        self.bst.put("aaa", 2)
-        self.assertEqual(self.bst.root.key, "bbb")
-        self.assertEqual(self.bst.root.right, None)
-        self.assertEqual(self.bst.root.left.key, "aaa")
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        size = 0
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-            size += 1
-            self.assertEqual(self.bst.get(k), v)
-            self.assertEqual(self.bst.size(), size)
-
-        self.bst = binary_search_tree.BinarySearchTree()
-
-        shuffled = self.shuffle_list(self.key_val[:])
-
-        size = 0
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-            size += 1
-            self.assertEqual(self.bst.get(k), v)
-            self.assertEqual(self.bst.size(), size)
-
-    def test_min_key(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in self.key_val[::-1]:
-            k, v = pair
-            self.bst.put(k, v)
-            self.assertEqual(self.bst.min_key(), k)
-
-        shuffled = self.shuffle_list(self.key_val[:])
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-        self.assertEqual(self.bst.min_key(), "a")
-
-    def test_max_key(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-            self.assertEqual(self.bst.max_key(), k)
-
-        shuffled = self.shuffle_list(self.key_val[:])
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-        self.assertEqual(self.bst.max_key(), "i")
-
-    def test_floor_key(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("a", 1)
-        self.bst.put("c", 3)
-        self.bst.put("e", 5)
-        self.bst.put("g", 7)
-        self.assertEqual(self.bst.floor_key("a"), "a")
-        self.assertEqual(self.bst.floor_key("b"), "a")
-        self.assertEqual(self.bst.floor_key("g"), "g")
-        self.assertEqual(self.bst.floor_key("h"), "g")
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("c", 3)
-        self.bst.put("e", 5)
-        self.bst.put("a", 1)
-        self.bst.put("g", 7)
-        self.assertEqual(self.bst.floor_key("a"), "a")
-        self.assertEqual(self.bst.floor_key("b"), "a")
-        self.assertEqual(self.bst.floor_key("g"), "g")
-        self.assertEqual(self.bst.floor_key("h"), "g")
-
-    def test_ceiling_key(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("a", 1)
-        self.bst.put("c", 3)
-        self.bst.put("e", 5)
-        self.bst.put("g", 7)
-        self.assertEqual(self.bst.ceiling_key("a"), "a")
-        self.assertEqual(self.bst.ceiling_key("b"), "c")
-        self.assertEqual(self.bst.ceiling_key("g"), "g")
-        self.assertEqual(self.bst.ceiling_key("f"), "g")
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("c", 3)
-        self.bst.put("e", 5)
-        self.bst.put("a", 1)
-        self.bst.put("g", 7)
-        self.assertEqual(self.bst.ceiling_key("a"), "a")
-        self.assertEqual(self.bst.ceiling_key("b"), "c")
-        self.assertEqual(self.bst.ceiling_key("g"), "g")
-        self.assertEqual(self.bst.ceiling_key("f"), "g")
-
-    def test_select_key(self):
-        shuffled = self.shuffle_list(self.key_val[:])
-
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-        self.assertEqual(self.bst.select_key(0), "a")
-        self.assertEqual(self.bst.select_key(1), "b")
-        self.assertEqual(self.bst.select_key(2), "c")
-
-    def test_rank(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-
-        self.assertEqual(self.bst.rank("a"), 0)
-        self.assertEqual(self.bst.rank("b"), 1)
-        self.assertEqual(self.bst.rank("c"), 2)
-        self.assertEqual(self.bst.rank("d"), 3)
-
-        shuffled = self.shuffle_list(self.key_val[:])
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-
-        self.assertEqual(self.bst.rank("a"), 0)
-        self.assertEqual(self.bst.rank("b"), 1)
-        self.assertEqual(self.bst.rank("c"), 2)
-        self.assertEqual(self.bst.rank("d"), 3)
-
-    def test_delete_min(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-        for i in range(self.bst.size() - 1):
-            self.bst.delete_min()
-            self.assertEqual(self.bst.min_key(), self.key_val[i + 1][0])
-        self.bst.delete_min()
-        self.assertEqual(self.bst.min_key(), None)
-
-        shuffled = self.shuffle_list(self.key_val[:])
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-        for i in range(self.bst.size() - 1):
-            self.bst.delete_min()
-            self.assertEqual(self.bst.min_key(), self.key_val[i + 1][0])
-        self.bst.delete_min()
-        self.assertEqual(self.bst.min_key(), None)
-
-    def test_delete_max(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-        for i in range(self.bst.size() - 1, 0, -1):
-            self.bst.delete_max()
-            self.assertEqual(self.bst.max_key(), self.key_val[i - 1][0])
-        self.bst.delete_max()
-        self.assertEqual(self.bst.max_key(), None)
-
-        shuffled = self.shuffle_list(self.key_val[:])
-
-        for pair in shuffled:
-            k, v = pair
-            self.bst.put(k, v)
-        for i in range(self.bst.size() - 1, 0, -1):
-            self.bst.delete_max()
-            self.assertEqual(self.bst.max_key(), self.key_val[i - 1][0])
-        self.bst.delete_max()
-        self.assertEqual(self.bst.max_key(), None)
-
-    def test_delete(self):
-        # delete key from an empty bst
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.delete("a")
-        self.assertEqual(self.bst.root, None)
-        self.assertEqual(self.bst.size(), 0)
-
-        # delete key not present in bst
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("a", 1)
-        self.bst.delete("b")
-        self.assertEqual(self.bst.root.key, "a")
-        self.assertEqual(self.bst.size(), 1)
-
-        # delete key when bst only contains one key
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("a", 1)
-        self.assertEqual(self.bst.root.key, "a")
-        self.bst.delete("a")
-        self.assertEqual(self.bst.root, None)
-        self.assertEqual(self.bst.size(), 0)
-
-        # delete parent key when it only has a left child
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("b", 2)
-        self.bst.put("a", 1)
-        self.assertEqual(self.bst.root.left.key, "a")
-        self.bst.delete("b")
-        self.assertEqual(self.bst.root.key, "a")
-        self.assertEqual(self.bst.size(), 1)
-
-        # delete parent key when it only has a right child
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("a", 1)
-        self.bst.put("b", 2)
-        self.assertEqual(self.bst.root.right.key, "b")
-        self.bst.delete("a")
-        self.assertEqual(self.bst.root.key, "b")
-        self.assertEqual(self.bst.size(), 1)
-
-        # delete left child key
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("b", 2)
-        self.bst.put("a", 1)
-        self.assertEqual(self.bst.root.left.key, "a")
-        self.bst.delete("a")
-        self.assertEqual(self.bst.root.key, "b")
-        self.assertEqual(self.bst.size(), 1)
-
-        # delete right child key
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("a", 1)
-        self.bst.put("b", 2)
-        self.assertEqual(self.bst.root.right.key, "b")
-        self.bst.delete("b")
-        self.assertEqual(self.bst.root.key, "a")
-        self.assertEqual(self.bst.size(), 1)
-
-        # delete parent key when it has a left and right child
-        self.bst = binary_search_tree.BinarySearchTree()
-        self.bst.put("b", 2)
-        self.bst.put("a", 1)
-        self.bst.put("c", 3)
-        self.bst.delete("b")
-        self.assertEqual(self.bst.root.key, "c")
-        self.assertEqual(self.bst.size(), 2)
-
-    def test_keys(self):
-        self.bst = binary_search_tree.BinarySearchTree()
-        for pair in self.key_val:
-            k, v = pair
-            self.bst.put(k, v)
-        self.assertEqual(
-            self.bst.keys(),
-            ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
-        )
+        self.assertEqual(len(self.bst), 4)
 
 
 class TestGraphInterface(unittest.TestCase):
@@ -539,6 +193,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.sta.remove(), 2)
         self.assertEqual(self.sta.is_empty(), False)
         self.assertEqual(self.sta.size(), 3)
+
 
 class TestUnionFind(unittest.TestCase):
 
