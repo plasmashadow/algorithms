@@ -85,6 +85,9 @@ class TestBST(unittest.TestCase):
         self.bst.delete(7)
         self.assertEqual(len(self.bst), 4)
 
+    def test_rank_of_tree(self):
+        self.assertEqual(self.bst.rank(5), 6)
+
 
 class TestGraphInterface(unittest.TestCase):
 

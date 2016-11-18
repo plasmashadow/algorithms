@@ -14,17 +14,15 @@ from collections import Hashable, Container
 
 
 def inorder(node):
-	"""Travel left-> root -> right"""
-    if node is not None:
-        for l in inorder(node.left):
-            yield l
+	if node is not None:
+		for l in inorder(node.left):
+			yield l
         yield node._value
         for l in inorder(node.right):
-            yield l
+        	yield l
 
 
 def preorder(node):
-	"""Travel root-> left -> right"""
     if node is not None:
         yield node._value
         for l in preorder(node.left):
@@ -34,7 +32,6 @@ def preorder(node):
 
 
 def postorder(node):
-	"""Travel left-> right -> root"""
     if node is not None:
         for l in postorder(node.left):
             yield l
@@ -44,6 +41,7 @@ def postorder(node):
 
 
 class BinaryNode(Hashable):
+
 	"""
 	A node in a binary tree consists of a value,
 	key - which uniquly identifies the node
@@ -87,7 +85,7 @@ class BinaryNode(Hashable):
 
 class BinaryTree(Container):
 	"""
-	Binary tree provides efficent mechanism of storing and 
+	Binary tree provides efficent mechanism of storing and
 	searching items. Since the tree is always sorted.
 	We know exactly where the retrival will take place.
 	"""
@@ -100,7 +98,7 @@ class BinaryTree(Container):
     def _find(self, key, node):
     	"""Find a node with a given key
     	Time Complexity
-    	 O(log N) - Balanced Tree 
+    	 O(log N) - Balanced Tree
     	 O(N) - Worst case
     	"""
         if node is None:
@@ -116,7 +114,7 @@ class BinaryTree(Container):
     def find(self, key):
     	"""Find a node with a given key
     	Time Complexity
-    	 O(log N) - Balanced Tree 
+    	 O(log N) - Balanced Tree
     	 O(N) - Worst case
     	"""
         return self._find(key, self._rootNode)
@@ -124,7 +122,7 @@ class BinaryTree(Container):
     def _put(self, key, _id, node):
     	"""Puts a node with a given key
     	Time Complexity
-    	 O(log N) - Balanced Tree 
+    	 O(log N) - Balanced Tree
     	 O(N) - Worst case
     	"""
         if node is None:
@@ -144,7 +142,7 @@ class BinaryTree(Container):
     def put(self, key, _id):
     	"""Puts a node with a given key
     	Time Complexity
-    	 O(log N) - Balanced Tree 
+    	 O(log N) - Balanced Tree
     	 O(N) - Worst case
     	"""
         return self._put(key, _id, self._rootNode)
@@ -248,3 +246,24 @@ class BinaryTree(Container):
                     next_level.append(n.right)
             print()
             current_level = next_level
+
+    def _rank(self, key, node):
+    	"""Find the rank of the given key
+    	Return the number of keys less than a given key
+    	"""
+    	if node is None:
+    		return None
+    	node_key = BinaryNode(key)
+    	if node_key < node:
+    		return self._rank(key, node.left)
+    	elif node_key > node:
+    		return self._size(node.left) + self._rank(key, node.right) + 1
+    	else:
+    		return self._size(node.left)
+
+    def rank(self, key):
+    	"""Retuns the number of keys less than the given key
+    	   Time complexity: O(N) - Worst Case
+    	                    O(log N) - Balanced Tree
+    	"""
+    	return self._rank(key, self._rootNode)
