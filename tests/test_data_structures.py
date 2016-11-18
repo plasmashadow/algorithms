@@ -4,6 +4,7 @@ import unittest
 from algorithms.data_structures import (
     tree,
     binary_search_tree,
+    binary_tree,
     queue,
     linked_list,
     stack,
@@ -30,6 +31,53 @@ class TestTreeInterface(unittest.TestCase):
         self.assertEqual(0, self.tree.get_degree(3))
         self.assertEqual([1, 2, 4, 3, 5], list(iter(self.tree)))
         self.assertEqual([1, 2, 3, 4, 5], list(self.tree.dfs()))
+
+
+class TestBST(unittest.TestCase):
+
+    def setUp(self):
+        self.bst = binary_tree.BinaryTree(5, "a")
+        self.bst.put(4, "b")
+        self.bst.put(6, "c")
+        self.bst.put(2, "d")
+        self.bst.put(7, "e")
+        self.bst.put(8, "f")
+
+    def test_add_leaf_nodes(self):
+        self.assertTrue(7 in self.bst)
+        self.assertTrue(2 in self.bst)
+
+    def test_min_object_in_tree(self):
+        self.assertEqual(self.bst.min._value, 2)
+        self.assertEqual(self.bst.min._id, "d")
+
+    def test_max_object_in_tree(self):
+        self.assertEqual(self.bst.max._value, 8)
+        self.assertEqual(self.bst.max._id, "f")
+
+    def test_tree_delete(self):
+        self.bst.delete(1)
+        self.assertFalse(1 in self.bst)
+        self.bst.delete(7)
+        self.assertEqual(self.bst.max._id, "f")
+
+    def test_tree_inorder_traversal(self):
+        lst = list(iter(self.bst))
+        self.assertEqual(lst, [2, 4, 5, 6, 7, 8])
+
+    def test_tree_preorder_traversal(self):
+        lst = list(self.bst.preorder())
+        self.assertEqual(lst, [5, 4, 2, 6, 7, 8])
+
+    def test_tree_postorder_traversal(self):
+        lst = list(self.bst.postorder())
+        self.assertEqual(lst, [2, 4, 8, 7, 6, 5])
+
+    def test_size_of_tree(self):
+        self.assertEqual(len(self.bst), 4)
+        self.bst.delete(8)
+        self.bst.delete(7)
+        self.assertEqual(len(self.bst), 3)
 
 
 class TestBinarySearchTree(unittest.TestCase):
