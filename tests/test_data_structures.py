@@ -3,7 +3,6 @@ import unittest
 
 from algorithms.data_structures import (
     tree,
-    binary_search_tree,
     binary_tree,
     queue,
     linked_list,
@@ -86,7 +85,7 @@ class TestBST(unittest.TestCase):
         self.assertEqual(len(self.bst), 4)
 
     def test_rank_of_tree(self):
-        self.assertEqual(self.bst.rank(5), 6)
+        self.assertEqual(self.bst.rank(5), 2)
 
 
 class TestGraphInterface(unittest.TestCase):

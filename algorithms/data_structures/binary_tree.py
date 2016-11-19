@@ -1,28 +1,28 @@
-
 """
-BST
-===
-In computer science, binary search trees (BST),
-sometimes called ordered or sorted binary trees,
-are a particular type of containers: data structures that store in memory.
-They allow fast lookup, addition and removal of items,
-and can be used to implement either dynamic sets of items,
-or lookup tables that allow finding an item by its key.
+    Binary Search Tree
+    ------------------
+    The Binary Search Tree represents an ordered symbol table of generic
+    key-value pairs.  Keys must be comparable.  Does not permit duplicate keys.
+    When assocating a value with a key already present in the BST, the previous
+    value is replaced by the new one.  This implementation is for an unbalanced
+    BST.
+    Pseudo Code: http://algs4.cs.princeton.edu/32bst
 """
-
 from collections import Hashable, Container
 
 
 def inorder(node):
-	if node is not None:
-		for l in inorder(node.left):
-			yield l
+    """ Left -> root -> Right """
+    if node is not None:
+        for l in inorder(node.left):
+            yield l
         yield node._value
         for l in inorder(node.right):
-        	yield l
+            yield l
 
 
 def preorder(node):
+    """Root -> left -> right """
     if node is not None:
         yield node._value
         for l in preorder(node.left):
@@ -32,6 +32,7 @@ def preorder(node):
 
 
 def postorder(node):
+    """ left -> right -> Root """
     if node is not None:
         for l in postorder(node.left):
             yield l
@@ -41,14 +42,9 @@ def postorder(node):
 
 
 class BinaryNode(Hashable):
-
-	"""
-	A node in a binary tree consists of a value,
-	key - which uniquly identifies the node
-	and left and right subtrees. When other node
-	gets added to the current node. It will increase
-	the size of the current node's subpath.
-	"""
+    """
+    Implementation of a Binary Search Tree.
+    """
 
     def __init__(self, val, _id=None):
         self._value = val
@@ -84,11 +80,6 @@ class BinaryNode(Hashable):
 
 
 class BinaryTree(Container):
-	"""
-	Binary tree provides efficent mechanism of storing and
-	searching items. Since the tree is always sorted.
-	We know exactly where the retrival will take place.
-	"""
 
     def __init__(self, root, _id):
         self._root = root
@@ -96,11 +87,10 @@ class BinaryTree(Container):
         self._rootNode = BinaryNode(root, _id)
 
     def _find(self, key, node):
-    	"""Find a node with a given key
-    	Time Complexity
-    	 O(log N) - Balanced Tree
-    	 O(N) - Worst case
-    	"""
+        """Find the node in binary Tree
+           O(N) - Worst Case
+           O(log N) - Balanced Tree
+        """
         if node is None:
             return None
         node_key = BinaryNode(key)
@@ -112,19 +102,17 @@ class BinaryTree(Container):
             return BinaryNode(node_key._value, node_key._id)
 
     def find(self, key):
-    	"""Find a node with a given key
-    	Time Complexity
-    	 O(log N) - Balanced Tree
-    	 O(N) - Worst case
-    	"""
+        """Find the node in binary Tree
+           O(N) - Worst Case
+           O(log N) - Balanced Tree
+        """
         return self._find(key, self._rootNode)
 
     def _put(self, key, _id, node):
-    	"""Puts a node with a given key
-    	Time Complexity
-    	 O(log N) - Balanced Tree
-    	 O(N) - Worst case
-    	"""
+        """Put the node in binary Tree
+           O(N) - Worst Case
+           O(log N) - Balanced Tree
+        """
         if node is None:
             return BinaryNode(key, _id)
         node_key = BinaryNode(key, _id)
@@ -140,37 +128,34 @@ class BinaryTree(Container):
         return node
 
     def put(self, key, _id):
-    	"""Puts a node with a given key
-    	Time Complexity
-    	 O(log N) - Balanced Tree
-    	 O(N) - Worst case
-    	"""
+        """Put the node in binary Tree
+           O(N) - Worst Case
+           O(log N) - Balanced Tree
+        """
         return self._put(key, _id, self._rootNode)
 
     def _min(self, node):
-    	"""Gets a minimum node"""
         if node.left:
             return self._min(node.left)
         return node
 
     @property
     def min(self):
-    	"""Gets the minimum node in the tree"""
         return self._min(self._rootNode)
 
     def _max(self, node):
-    	"""gets the maximum node"""
+        """gets the maximum node"""
         if node.right:
             return self._max(node.right)
         return node
 
     @property
     def max(self):
-    	"""gets the bigger node in the tree"""
+        """gets the bigger node in the tree"""
         return self._max(self._rootNode)
 
     def _size(self, node):
-    	"""gets the number of element in the tree"""
+        """gets the number of element in the tree"""
         if node is None:
             return 0
         return node._size_of_subtree
@@ -182,23 +167,19 @@ class BinaryTree(Container):
         return self.find(key) is not None
 
     def __iter__(self):
-    	"""Traverses the elements inorder"""
+        """Traverses the elements inorder"""
         return iter(self._rootNode)
 
     def preorder(self):
-    	"""Traverses the elements in preorder"""
+        """Traverses the elements in preorder"""
         return iter(preorder(self._rootNode))
 
     def postorder(self):
-    	"""Traverses thee element in postorder"""
+        """Traverses thee element in postorder"""
         return iter(postorder(self._rootNode))
 
     def _delete(self, key, node):
-    	"""Deletes a node with the given key
-    	Time Complexity:
-    	O(N) = Worst Case
-    	O(log N) = Balanced Binary Tree
-    	"""
+        """Delete the node in binary Tree"""
         if node is None:
             return node
         node_key = BinaryNode(key)
@@ -226,16 +207,13 @@ class BinaryTree(Container):
         return node
 
     def delete(self, key):
-    	"""Deletes a node with the given key
-    	Time Complexity:
-    	O(N) = Worst Case
-    	O(log N) = Balanced Binary Tree
-    	"""
+        """Delete the node in binary tree
+           O(N) - worst case_1
+           O(log N) - balanced tree"""
         self._rootNode = self._delete(key, self._rootNode)
 
     def pprint(self):
-    	"""Pretty Prints the given binary Tree"""
-        current_level = [self._rootNode]
+        current_level = [self._rootNodes]
         while current_level:
             next_level = []
             for n in current_level:
@@ -248,22 +226,19 @@ class BinaryTree(Container):
             current_level = next_level
 
     def _rank(self, key, node):
-    	"""Find the rank of the given key
-    	Return the number of keys less than a given key
-    	"""
-    	if node is None:
-    		return None
-    	node_key = BinaryNode(key)
-    	if node_key < node:
-    		return self._rank(key, node.left)
-    	elif node_key > node:
-    		return self._size(node.left) + self._rank(key, node.right) + 1
-    	else:
-    		return self._size(node.left)
+        """Rank of the binary tree"""
+        if node is None:
+            return None
+        node_key = BinaryNode(key)
+        if node_key < node:
+            return self._rank(key, node.left)
+        elif node_key > node:
+            return self._size(node.left) + self._rank(key, node.right) + 1
+        else:
+            return self._size(node.left)
 
     def rank(self, key):
-    	"""Retuns the number of keys less than the given key
-    	   Time complexity: O(N) - Worst Case
-    	                    O(log N) - Balanced Tree
-    	"""
-    	return self._rank(key, self._rootNode)
+        """Rank of binary tree
+           O(N) - Worst Case
+           O(log N) - Balanced Tree"""
+        return self._rank(key, self._rootNode)
