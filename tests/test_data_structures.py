@@ -4,13 +4,11 @@ import unittest
 from algorithms.data_structures import (
     tree,
     binary_tree,
+    disjoint_set,
     queue,
     linked_list,
     stack,
     graph,
-    union_find,
-    union_find_by_rank,
-    union_find_with_path_compression,
     lcp_array
 )
 
@@ -204,8 +202,7 @@ class TestUnionFind(unittest.TestCase):
     """
 
     def test_union_find(self):
-        self.uf = union_find.UnionFind(4)
-        self.uf.make_set(4)
+        self.uf = disjoint_set.DistjointSet(0, 1, 2, 3, 4)
         self.uf.union(1, 0)
         self.uf.union(3, 4)
 
@@ -222,8 +219,7 @@ class TestUnionFindByRank(unittest.TestCase):
     """
 
     def test_union_find_by_rank(self):
-        self.uf = union_find_by_rank.UnionFindByRank(6)
-        self.uf.make_set(6)
+        self.uf = disjoint_set.DisjointSetWithUnionRank(0, 1, 2, 3, 4, 5, 6)
         self.uf.union(1, 0)
         self.uf.union(3, 4)
         self.uf.union(2, 4)
@@ -252,25 +248,24 @@ class TestUnionFindWithPathCompression(unittest.TestCase):
 
     def test_union_find_with_path_compression(self):
         self.uf = (
-            union_find_with_path_compression
-            .UnionFindWithPathCompression(5)
+            disjoint_set
+            .DisjointSetWithPathCompression(0, 1, 2, 3, 4, 5)
         )
 
-        self.uf.make_set(5)
         self.uf.union(0, 1)
         self.uf.union(2, 3)
         self.uf.union(1, 3)
         self.uf.union(4, 5)
-        self.assertEqual(self.uf.find(1), 0)
-        self.assertEqual(self.uf.find(3), 0)
-        self.assertEqual(self.uf.parent(3), 2)
-        self.assertEqual(self.uf.parent(5), 4)
+        self.assertEqual(self.uf.find(1), 3)
+        self.assertEqual(self.uf.find(3), 3)
+        self.assertEqual(self.uf.parent(3), 3)
+        self.assertEqual(self.uf.parent(5), 5)
         self.assertEqual(self.uf.is_connected(3, 5), False)
         self.assertEqual(self.uf.is_connected(4, 5), True)
         self.assertEqual(self.uf.is_connected(2, 3), True)
         # test tree is created by path compression
         self.uf.union(5, 3)
-        self.assertEqual(self.uf.parent(3), 0)
+        self.assertEqual(self.uf.parent(3), 3)
 
         self.assertEqual(self.uf.is_connected(3, 5), True)
 

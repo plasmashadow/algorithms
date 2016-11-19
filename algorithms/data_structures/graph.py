@@ -119,7 +119,6 @@ class UndirectedGraph(Graph):
             raise Exception("Not a Vertex, %d" % x)
         if y not in self.vertexlist:
             raise Exception("Not a Vertex, %d" % y)
-
         self.vertexlist[x].add_neighbor(self.vertexlist[y], weight)
         self.vertexlist[y].add_neighbor(self.vertexlist[x], weight)
 

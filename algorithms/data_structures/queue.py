@@ -13,6 +13,7 @@
 """
 from collections import deque
 
+
 class Queue(object):
     queue_list = deque([])
 
@@ -55,4 +56,3 @@ class Queue(object):
     def __contains__(self, element):
         """Contains """
         return element in self.queue_list
-
